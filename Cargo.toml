@@ -7,6 +7,7 @@ edition = "2021"
 ndarray = "0.15"
 ndarray-rand = "0.14"
 rand = "0.8"
+env_logger = "0.11.8"
 
 [dev-dependencies]
 criterion = "0.5.1"
