@@ -778,7 +778,7 @@ pub fn cross_approx<M: MatrixAccess>(
                     continue;
                 }
 
-                if pivot.abs() < 1e-12 { break; }
+                //if pivot.abs() < 1e-12 { break; }
 
                 for j in 0..n {
                     q_matrix.set(j, i, temp_col[j]);
@@ -945,13 +945,12 @@ pub fn cross_approx<M: MatrixAccess>(
         approx_norm_squared += q_norm * r_norm;
 
         if eps > 0.0 {
-            let error_bound = pivot.abs() * (((m - i) * (n - i)) as f64).sqrt();
+            let error_bound = pivot.abs() * (((m - i - free_row) * (n - i - free_col)) as f64).sqrt();
             if approx_norm_squared.sqrt() * eps >= error_bound {
                 return (q_matrix, r_matrix, i + 1);
             }
         }
     }
-
     q_matrix.shrink_to_fit();
     r_matrix.shrink_to_fit();
 
